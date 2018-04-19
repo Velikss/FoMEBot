@@ -1,0 +1,16 @@
+{
+  "name": "crusaderbot",
+  "version": "1.0.0",
+  "description": "LOTR Bot",
+  "main": "crusader.js",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "winston": "^2.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Veliks",
+  "license": "ISC"
+}
