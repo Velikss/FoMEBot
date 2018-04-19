@@ -68,28 +68,5 @@ client.on("message", (message) => {
         }
     });
 
-//Basic response commands
-/*
-    if (message_content.includes("what will you take") || message_content.includes("what will we take")) {
-        console.log(message.author.username + ' said: ' + message.content);
-        message.channel.send("**WE WILL TAKE JERUSALEM**");
-    } else if (message_content.includes("we will take jerusalem")) {
-        console.log(message.author.username + ' said: ' + message.content);
-        message.channel.send("**DEUS VULT**");
-    } else if (message_content.includes("what is 1+1")) {
-        console.log(message.author.username + ' said: ' + message.content);
-        message.channel.send("**DEUS VULT**");
-    } else if (message_content.includes("what is our mission")) {
-        console.log(message.author.username + ' said: ' + message.content);
-        message.channel.send("**To slay the Saracens!!11!!!1!!1**");
-    } else if (message_content.includes("deus vult") || message_content.includes("gods will")) {
-        console.log(message.author.username + ' said: ' + message.content);
-        message.react("436514499156115480");
-        message.channel.send("Yes! **DEUS VULT**");
-    } else if (message.content === "no u") {
-        console.log(message.author.username + ' said: ' + message.content);
-        message.channel.send("Infidel!");
-    }
-*/
 });
 client.login(config.token);
