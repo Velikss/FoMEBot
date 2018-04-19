@@ -1,7 +1,7 @@
 {
   "name": "crusaderbot",
   "version": "1.0.0",
-  "description": "LOTR Bot",
+  "description": "The best crusader",
   "main": "crusader.js",
   "dependencies": {
     "discord.js": "^11.3.2",
