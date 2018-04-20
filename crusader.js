@@ -33,11 +33,18 @@ fs.readdir("./events/", (err, files) => {
         client.on(eventName, (...args) => eventFunction.run(client, ...args));
     });
 });
+
 //Code to be run when a message is received
 client.on("message", (message) => {
-
+//   Blocks bots, except for the gamechat bot
     if (message.author.bot && message.author.id !== "366713944695373834")
         return;
+//  Reminds people that tagging staff in staff-help is needless, hopefully they will remember...
+    if (message.channel.name === "staff-help" && message.isMentioned("338451664816308225")) {
+        message.channel.send("**Infidel!** There is no need to tag staff in this channel!");
+        console.log(message.author.username + 'TAGGED STAFF IN STAFF-HELP REEEEEEEE');
+        return;
+    }
 
     if (message.content.indexOf(config.prefix) === 0) {
         console.log(message.author.username + ' tried running command:' + message.content + " (#" + message.channel.name + ")");
