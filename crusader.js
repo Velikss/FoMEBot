@@ -36,8 +36,8 @@ fs.readdir("./events/", (err, files) => {
 
 //Code to be run when a message is received
 client.on("message", (message) => {
-//Blocks bots, except for the gamechat bot
-    if (message.author.bot && message.author.id !== "366713944695373834")
+//Blocks bots, except for the gamechat bot and ignore discordconsole channel
+    if (message.author.bot && message.author.id !== "366713944695373834" || message.channel.id === "381458100986839041")
         return;
 	
 //Reminds people that tagging staff in staff-help is needless, hopefully they will remember...
