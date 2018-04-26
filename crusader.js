@@ -2,8 +2,15 @@ const Discord = require("discord.js");
 const list = require("./list.json");
 const fs = require("fs");
 
-const client = new Discord.Client();
-client.config = require("./config.json");
+class Crusader extends Discord.Client {
+    constructor(options) {
+        super(options);
+        this.config = require("./config.json");
+        this.dic = new Object;
+    }
+}
+
+const client = new Crusader();
 
 fs.readFile('./list.json', 'utf8', function (err, data) {
 	if (err)
