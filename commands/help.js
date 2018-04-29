@@ -32,6 +32,13 @@ class Help extends Command {
                 }
                 output += `${this.client.config.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
             });
+
+            //Adds messages as a category
+            output+= `\u200b\n== Trigger Phrases ==\n`;
+            Object.keys(this.client.dic).forEach(phrase => {
+                output += `${phrase}\n`;
+            });
+
             message.channel.send(output, {code:"asciidoc", split: { char: "\u200b" }});
         } else {
             // Show individual command's help.
