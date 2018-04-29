@@ -15,7 +15,7 @@ class Ping extends Command {
             const msg = await message.channel.send("Ping!");
             msg.edit(`Pong! (${msg.createdTimestamp - message.createdTimestamp}ms)`);
         } catch (e) {
-            console.log(e);
+           this.client.logger.error(e);
         }
     }
 }

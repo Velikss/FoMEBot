@@ -9,6 +9,8 @@ class Crusader extends Discord.Client {
     constructor(options) {
         super(options);
         this.config = require("./config.json");
+        this.logger = require("./util/Logger");
+
         this.dic = new Object;
         this.commands = new Enmap();
         this.aliases = new Enmap();
@@ -24,7 +26,7 @@ class Crusader extends Discord.Client {
         text = text
             .replace(/`/g, "`" + String.fromCharCode(8203))
             .replace(/@/g, "@" + String.fromCharCode(8203))
-            .replace(client.token, "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
+            .replace(client.token, "NO TOKEN FOR YOU");
 
         return text;
     }
@@ -32,7 +34,7 @@ class Crusader extends Discord.Client {
     loadCommand(commandPath, commandName) {
         try {
             const props = new (require(`${commandPath}${path.sep}${commandName}`))(client);
-            console.log(`Loading Command: ${props.help.name}. 👌`);
+            client.logger.log(`Loading Command: ${props.help.name}. 👌`);
             props.conf.location = commandPath;
             if (props.init) {
                 props.init(client);
@@ -57,25 +59,17 @@ const init = async () => {
         client.dic = JSON.parse(data);
     });
 
-    //Start logger
-    var logger = require('winston');
-    logger.remove(logger.transports.Console);
-    logger.level = 'debug';
-    logger.add(logger.transports.Console, {
-        colorize: true
-    });
-
     //Command Handler
     klaw("./commands").on("data", (item) => {
         const cmdFile = path.parse(item.path);
         if (!cmdFile.ext || cmdFile.ext !== ".js") return;
         const response = client.loadCommand(cmdFile.dir, `${cmdFile.name}${cmdFile.ext}`);
-        if (response) console.log(response);
+        if (response) client.logger.warn(response);
     });
 
     //Initializing events
     await fs.readdir("./events/", (err, files) => {
-        console.log("Loading a total of " + files.length + " events...");
+        client.logger.log("Loading a total of " + files.length + " events...");
         if (err) console.error(err);
         files.forEach(file => {
             if (!file.endsWith(".js")) return;
@@ -91,3 +85,8 @@ const init = async () => {
 }
 
 init();
+
+client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
+    .on("reconnect", () => client.logger.log("Bot reconnecting...", "log"))
+    .on("error", e => client.logger.error(e))
+    .on("warn", info => client.logger.warn(info));
