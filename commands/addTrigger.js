@@ -1,12 +1,12 @@
 const Command = require("../structures/Command.js");
 
-class Ping extends Command {
+class AddTrigger extends Command {
     constructor(client) {
         super(client, {
-            name: "ping",
-            description: "Latency response times.",
-            usage: "ping",
-            aliases: ["pong"]
+            name: "addTrigger",
+            description: "Adds a trigger and response.",
+            category: "System"n
+            usage: 'addTrigger "trigger" "response"'
         });
     }
 
@@ -15,9 +15,9 @@ class Ping extends Command {
             const msg = await message.channel.send("Ping!");
             msg.edit(`Pong! (${msg.createdTimestamp - message.createdTimestamp}ms)`);
         } catch (e) {
-           this.client.logger.error(e);
+            console.log(e);
         }
     }
 }
 
-module.exports = Ping;
+module.exports = AddTrigger;

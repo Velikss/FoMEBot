@@ -1,14 +1,7 @@
 exports.run = (client, message) => {
-    //Blocks bots, except for the gamechat bot and ignore discordconsole channel
-    if (message.author.bot && message.author.id !== "366713944695373834" || message.channel.id === "381458100986839041")
-        return;
 
-    //Reminds people that tagging staff in staff-help is needless, hopefully they will remember...
-    //     if (message.channel.name === "staff-help" && message.isMentioned("338451664816308225")) {
-    //         message.channel.send("**Infidel!** There is no need to tag staff in this channel!");
-    //         console.log(message.author.username + 'TAGGED STAFF IN STAFF-HELP REEEEEEEE');
-    //         return;
-    //     }
+    //Blocks bots, except for the gamechat bot and ignore discordclient.logger channel
+    if (message.author.bot && message.author.id !== "366713944695373834" || message.channel.id === "381458100986839041") return;
 
     if (message.content.indexOf(client.config.prefix) === 0) {
 
@@ -21,10 +14,9 @@ exports.run = (client, message) => {
         if (!cmd) return;
 
         //Logs and runs
-        console.log(`${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
+        client.logger.log(`${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`, "cmd");
         cmd.run(message, args);
-
-   }
+    }
 
     //If bot gets mentioned
     if (message.isMentioned(client.user)) {
@@ -36,7 +28,7 @@ exports.run = (client, message) => {
     Object.keys(client.dic).forEach(key => {
         if (message_content.includes(key))
         {
-            console.log(`Found key "${key}" in message "${message_content}" sent by ${message.author} (#${message.channel.name})`);
+            client.logger.log(`Found key "${key}" in message "${message_content}" sent by ${message.author.username} (#${message.channel.name})`, "cmd");
             message.channel.send(client.dic[key]);
         }
     });
