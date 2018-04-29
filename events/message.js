@@ -11,18 +11,20 @@ exports.run = (client, message) => {
     //     }
 
     if (message.content.indexOf(client.config.prefix) === 0) {
-        console.log(message.author.username + ' tried running command:' + message.content + " (#" + message.channel.name + ")");
+
         // This is the best way to define args. Trust me.
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
-        // The list of if/else is replaced with those simple 2 lines:
-        try {
-            let commandFile = require(`./commands/${command}.js`);
-            commandFile.run(client, message, args);
-        } catch (err) {
-            console.error(err);
-        }
-    }
+
+        //Check if the command or alias exists
+        const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
+        if (!cmd) return;
+
+        //Logs and runs
+        console.log(`${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
+        cmd.run(message, args);
+
+   }
 
     //If bot gets mentioned
     if (message.isMentioned(client.user)) {
@@ -34,7 +36,7 @@ exports.run = (client, message) => {
     Object.keys(client.dic).forEach(key => {
         if (message_content.includes(key))
         {
-            console.log("Found key \"" + key + "\" in message \"" + message_content + "\" sent by " + message.author.username + " (#" + message.channel.name + ")");
+            console.log(`Found key "${key}" in message "${message_content}" sent by ${message.author} (#${message.channel.name})`);
             message.channel.send(client.dic[key]);
         }
     });
