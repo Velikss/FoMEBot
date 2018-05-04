@@ -25,7 +25,7 @@ exports.run = (client, message) => {
 
     //Loop for responses
     var message_content = message.content.toLowerCase();
-    Object.keys(client.dic).forEach(key => {
+    Object.keys(client.dic).map(key => {
         if (message_content.includes(key))
         {
             client.logger.log(`Found key "${key}" in message "${message_content}" sent by ${message.author.username} (#${message.channel.name})`, "cmd");
