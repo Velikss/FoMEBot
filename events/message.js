@@ -18,6 +18,9 @@ exports.run = (client, message) => {
         cmd.run(message, args);
     }
 
+    //Stops running if the channel isn't the designated meme channel
+    if (client.config.memeChannel && message.channel.id !== client.config.memeChannel) return;
+
     //If bot gets mentioned
     if (message.isMentioned(client.user)) {
         message.reply('what do you want, you filthy infidel.');
