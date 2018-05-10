@@ -1,5 +1,6 @@
 {
   "token": "BOT TOKEN",
   "prefix": "!",
-  "ownerID": "YOUR ID"
+  "ownerID": "YOUR ID",
+  "memeChannel": "MEME CHANNEL: OPTIONAL"
 }
