@@ -12,7 +12,9 @@ class Eval extends Command {
     }
 
     async run(message, args) {
-        if (message.author.id !== this.client.config.owner) return;
+        // this.client.logger.log(this.client.config.owner.indexOf(message.author.id) == -1);
+        if (this.client.config.owner.indexOf(message.author.id) == -1) return;
+
         const code = args.join(" ");
         try {
             const evaled = eval(code);
@@ -21,6 +23,7 @@ class Eval extends Command {
         } catch (err) {
             message.channel.send(`\`ERROR\` \`\`\`xl\n${await this.client.clean(this.client, err)}\n\`\`\``);
         }
+
     }
 }
 
