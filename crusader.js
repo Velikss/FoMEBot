@@ -48,6 +48,11 @@ class Crusader extends Discord.Client {
             return `Unable to load command ${commandName}: ${e}`;
         }
     }
+    
+    permlevel(message)
+    {
+        
+    }
 }
 
 const client = new Crusader();
