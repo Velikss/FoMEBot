@@ -19,7 +19,7 @@ exports.run = (client, message) => {
     }
 
     //Stops running if the channel isn't the designated meme channel
-    if (client.config.memeChannel && message.channel.id !== client.config.memeChannel) return;
+    if (client.config.memeChannel!="MEME CHANNEL: OPTIONAL" && message.channel.id !== client.config.memeChannel) return;
 
     //If bot gets mentioned
     if (message.isMentioned(client.user)) {
