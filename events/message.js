@@ -9,9 +9,15 @@ exports.run = (client, message) => {
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
+        //Fetch user permission level
+        const level = client.permlevel(message);
+
         //Check if the command or alias exists
         const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
         if (!cmd) return;
+
+        //Check if user has permission to run said command
+        if (level < cmd.conf.permLevel) return;
 
         //Logs and runs
         client.logger.log(`${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`, "cmd");

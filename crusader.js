@@ -48,6 +48,15 @@ class Crusader extends Discord.Client {
             return `Unable to load command ${commandName}: ${e}`;
         }
     }
+
+    permlevel(message)
+    {
+        if (client.config.owner.indexOf(message.author.id) !== -1) return 10;
+
+        else if (message.member.roles.find("name", client.config.modRole)) return 5;
+
+        else return 0;
+    }
 }
 
 const client = new Crusader();

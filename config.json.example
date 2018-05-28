@@ -2,5 +2,6 @@
   "token": "BOT TOKEN",
   "prefix": "!",
   "owner": ["YOUR ID", "OPTIONAL SECOND OWNER ID"],
+  "modRole": "Staff",
   "memeChannel": "MEME CHANNEL: OPTIONAL"
 }
