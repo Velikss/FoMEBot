@@ -6,14 +6,14 @@ class Eval extends Command {
             name: "eval",
             description: "Evaluates arbitrary Javascript.",
             category: "System",
+            permLevel: 10,
             usage: "eval <expression>",
             aliases: ["ev"],
         });
     }
 
     async run(message, args) {
-        // this.client.logger.log(this.client.config.owner.indexOf(message.author.id) == -1);
-        if (this.client.config.owner.indexOf(message.author.id) == -1) return;
+        //if (this.client.config.owner.indexOf(message.author.id) == -1) return;
 
         const code = args.join(" ");
         try {
