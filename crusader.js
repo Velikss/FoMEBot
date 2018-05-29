@@ -49,14 +49,21 @@ class Crusader extends Discord.Client {
         }
     }
 
-    permlevel(message)
-    {
+    permlevel(message) {
         if (client.config.owner.indexOf(message.author.id) !== -1) return 10;
 
         else if (message.member.roles.find("name", client.config.modRole)) return 5;
 
         else return 0;
     }
+
+    saveList() {
+        fs.writeFile('list.json', JSON.stringify(this.dic, null, 4), err => {
+            if (err) this.logger.error(err);
+            else this.logger.log("Saved dictionary to file!");
+        });
+    }
+
 }
 
 const client = new Crusader();
