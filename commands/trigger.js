@@ -15,10 +15,17 @@ class Trigger extends Command {
         const raw = args.slice(1).join(" ");
 
         //regex magic don't worry about it too much
+        if (!raw){
+            message.channel.send("Not enough arguments!");
+            return;
+        }
+
         const clean = raw.match(/\w+|"[^"]+"/g).map(phrase => phrase.replace(/['"]/g, ''));
+
 
         var key = clean[0].toLowerCase(),
             val = clean[1];
+
 
         switch(args[0]) {
             case "add":
