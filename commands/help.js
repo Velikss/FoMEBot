@@ -25,12 +25,14 @@ class Help extends Command {
 
             const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
             sorted.forEach( c => {
-                const cat = c.help.category;
-                if (currentCategory !== cat) {
-                    output += `\u200b\n== ${cat} ==\n`;
-                    currentCategory = cat;
+                if (c.conf.permLevel <= this.client.permlevel(message)){
+                    const cat = c.help.category;
+                    if (currentCategory !== cat) {
+                        output += `\u200b\n== ${cat} ==\n`;
+                        currentCategory = cat;
+                    }
+                    output += `${this.client.config.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
                 }
-                output += `${this.client.config.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
             });
 
             //Adds messages as a category
