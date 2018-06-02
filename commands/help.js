@@ -45,9 +45,15 @@ class Help extends Command {
         } else {
             // Show individual command's help.
             let command = args[0];
-            if (this.client.commands.has(command)) {
+            if (this.client.commands.has(command)){
                 command = this.client.commands.get(command);
-                message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}`, {code:"asciidoc"});
+                if (command.conf.permLevel <= this.client.permlevel(message)){
+                    message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}`, {code:"asciidoc"});
+                }
+                else {
+                    message.channel.send("You do not have permission to view this command!");
+                }
+
             }
         }
     }
