@@ -6,7 +6,7 @@ class Trigger extends Command {
             name: "trigger",
             description: "Changes the triggers available to the bot",
             usage: 'trigger <add/del> "<key>" "<value>"',
-            permission: 5
+            permLevel: 5
         });
     }
 
