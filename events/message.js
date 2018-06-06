@@ -17,7 +17,10 @@ exports.run = (client, message) => {
         if (!cmd) return;
 
         //Check if user has permission to run said command
-        if (level < cmd.conf.permLevel) return;
+        if (level < cmd.conf.permLevel) {
+            message.channel.send("You do not have permission to run this command!");
+            return;
+        }
 
         //Logs and runs
         client.logger.log(`${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`, "cmd");

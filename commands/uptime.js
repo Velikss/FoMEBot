@@ -11,12 +11,10 @@ class Uptime extends Command {
     }
 
     async run(message, args) {
-        if (message.member.roles.find("name", "Staff")) {
-            var minutes = this.client.uptime / 1000 / 60;
-            message.channel.send('I have been running for: ' + minutes + ' minutes.');
-        } else {
-            message.channel.send('Sadly this command is not available to you :slight_frown:');
-        }
+            var raw_seconds = Math.floor(this.client.uptime / 1000)
+            var minutes = Math.floor(raw_seconds / 60);
+            var seconds = Math.floor(raw_seconds % 60);
+            message.channel.send(`I have been running for: ${minutes} minutes and ${seconds} seconds`);
     }
 }
 
