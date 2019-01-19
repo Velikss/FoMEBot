@@ -23,7 +23,7 @@ exports.run = (client, message) => {
         }
 
         //Logs and runs
-        client.logger.log(`${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`, "cmd");
+        client.logger.log(`${message.author.username} (${message.author.id}) ran command ${cmd.help.name} - ${message.content}`, "cmd");
         cmd.run(message, args);
     }
 
